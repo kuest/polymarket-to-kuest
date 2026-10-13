@@ -9,7 +9,7 @@
 Migrating Polymarket bots to Kuest requires endpoint, authentication, network,
 and V2 signed-order changes.
 
-- TypeScript SDK: `@kuestcom/clob-client`
+- TypeScript SDK: `@kuest/clob-client`
 - Rust SDK: https://crates.io/crates/kuest-client-sdk
 - Python SDK: https://pypi.org/project/kuest-py-clob-client/
 

@@ -112,9 +112,9 @@ Builder relayer env vars:
 See `mapping.json` for the full package and import mapping.
 
 ### TypeScript
-- CLOB: `@polymarket/clob-client` -> `@kuestcom/clob-client`
-- Builder signing: `@polymarket/builder-signing-sdk` -> `@kuestcom/builder-signing-sdk`
-- Builder relayer: `@polymarket/builder-relayer-client` -> `@kuestcom/builder-relayer-client`
+- CLOB: `@polymarket/clob-client` -> `@kuest/clob-client`
+- Builder signing: `@polymarket/builder-signing-sdk` -> `@kuest/builder-signing-sdk`
+- Builder relayer: `@polymarket/builder-relayer-client` -> `@kuest/builder-relayer-client`
 
 ### Deposit Wallet relayer
 - Derive `walletId` as `bytes32(uint256(uint160(owner)))`, then call `predictWalletAddress(bytes32 walletId)`.

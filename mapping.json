@@ -168,10 +168,10 @@
     },
     "typescript": {
       "packages": {
-        "@polymarket/clob-client": "@kuestcom/clob-client",
-        "@polymarket/clob-client-v2": "@kuestcom/clob-client",
-        "@polymarket/builder-relayer-client": "@kuestcom/builder-relayer-client",
-        "@polymarket/builder-signing-sdk": "@kuestcom/builder-signing-sdk"
+        "@polymarket/clob-client": "@kuest/clob-client",
+        "@polymarket/clob-client-v2": "@kuest/clob-client",
+        "@polymarket/builder-relayer-client": "@kuest/builder-relayer-client",
+        "@polymarket/builder-signing-sdk": "@kuest/builder-signing-sdk"
       }
     }
   },
