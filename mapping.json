@@ -125,7 +125,7 @@
       "neg_risk_uma_ctf_adapter": "0x70DC1B3761F2902DF8F9b1B0C27dcEA128b4a876",
       "deposit_wallet_factory": "0x2CcdC6C5dDcd895aFcCD259F291de9b618A5cA6c",
       "deposit_wallet_beacon": "0x74a618eBdd62Ff8579A8FE94f5B888d7623b9C35",
-      "deposit_wallet_impl": "0x65507Fa36589B3b2ceD54E77999909e843691e44"
+      "deposit_wallet_impl": "0xe77c755F94c622d59a9D55bfF424D48A94538D97"
     }
   },
   "optional_env_vars": [

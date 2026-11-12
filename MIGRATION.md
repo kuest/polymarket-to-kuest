@@ -46,7 +46,7 @@ Notes:
 | NegRisk UMA CTF Adapter | `0x70DC1B3761F2902DF8F9b1B0C27dcEA128b4a876` |
 | DepositWallet Factory | `0x2CcdC6C5dDcd895aFcCD259F291de9b618A5cA6c` |
 | DepositWallet Beacon | `0x74a618eBdd62Ff8579A8FE94f5B888d7623b9C35` |
-| DepositWallet Impl | `0x65507Fa36589B3b2ceD54E77999909e843691e44` |
+| DepositWallet Impl | `0xe77c755F94c622d59a9D55bfF424D48A94538D97` |
 | USDC Circle (Polygon mainnet) | `0x3c499c542cef5e3811e1192ce70d8cc03d5c3359` |
 
 ## Auth header mapping
