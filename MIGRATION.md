@@ -38,6 +38,10 @@ Notes:
 - Use `price.crypto`, `price.equity`, or their `.twap` channels. TWAP uses `window_seconds: 60`; unsupported providers/windows fail explicitly. Preserve the reported source and `full_accuracy_value`.
 - For V2 discovery and builder flows, wire `GET /version`, `GET /clob-markets/{conditionId}`, `GET /fees/builder-fees/{builderCode}`, and `GET /builder/trades?builder_code=...`.
 
+## Order reads
+- `GET /data/orders` accepts `asset_id` without `market`; the market filter remains optional.
+- REST order responses do not include `associate_trades`. Read authenticated `GET /data/trades` and match `taker_order_id` or `maker_orders[].order_id` when confirming fills; paginate as needed. WebSocket order messages retain their existing fields.
+
 ## Kuest V2 contracts and collateral
 | Name | Address |
 |------|---------|
