@@ -4,7 +4,7 @@ Use this guide to adapt Polymarket trading scripts, SDKs, and direct API clients
 
 ## Quick checklist
 - Replace every `POLYMARKET_` prefix with `KUEST_` in env vars and headers.
-- Replace every `*.polymarket.com` domain with `*.kuest.com`, keeping the same subdomain.
+- Replace service URLs using the endpoint mapping below; live prices use a different hostname/path.
 - Use Exchange EIP-712 domain `name = "CTF Exchange"` and `version = "2"` for orders. Auth/L1/L2 headers keep their existing auth-domain version.
 - Remove `taker`, `expiration`, `nonce`, and `feeRateBps` from the signed order struct.
 - Add signed order fields `timestamp` in milliseconds, `metadata` bytes32, and `builder` bytes32.
@@ -15,7 +15,7 @@ Use this guide to adapt Polymarket trading scripts, SDKs, and direct API clients
 - Trading uses Deposit Wallet as `maker` and `signer`, with signature type `3`.
 - Direct relayer calls use `WALLET` / `WALLET-CREATE` instead of `SAFE` / `PROXY`.
 - Deploy the Deposit Wallet before posting orders; relayer credentials are separate from CLOB credentials.
-- CLOB, WS, Data, RTDS, and Bridge are otherwise compatible and similar.
+- Live prices use channel/filter subscriptions; local activity and comments retain their topic subscriptions.
 
 ## Network and collateral
 - Kuest runs on Polygon Mainnet (chainId 137) and uses Circle USDC.
@@ -28,12 +28,14 @@ Use this guide to adapt Polymarket trading scripts, SDKs, and direct API clients
 | CLOB WS      | wss://ws-subscriptions-clob.polymarket.com   | wss://ws-subscriptions-clob.kuest.com   |
 | Data API     | https://data-api.polymarket.com              | https://data-api.kuest.com              |
 | Bridge API   | https://bridge.polymarket.com                | https://bridge.kuest.com                |
-| RTDS WS      | wss://ws-live-data.polymarket.com            | wss://ws-live-data.kuest.com            |
+| Live prices  | wss://ws-live-v2.polymarket.com/ws           | wss://ws-live-data.kuest.com            |
 | Gamma API    | https://gamma-api.polymarket.com             | https://gamma-api.kuest.com             |
 | Geoblock API | https://polymarket.com/api/geoblock          | https://geoblock.kuest.com              |
 | Relayer API  | https://relayer.polymarket.com               | https://relayer.kuest.com               |
 
 Notes:
+- Live prices use `op`, `channel`, and object `filter` subscriptions with `v/channel/seq/ts/payload` responses. Public Kuest price subscriptions do not require upstream credentials. Keep Polymarket credentials server-side; do not copy them to clients.
+- Use `price.crypto`, `price.equity`, or their `.twap` channels. TWAP uses `window_seconds: 60`; unsupported providers/windows fail explicitly. Preserve the reported source and `full_accuracy_value`.
 - For V2 discovery and builder flows, wire `GET /version`, `GET /clob-markets/{conditionId}`, `GET /fees/builder-fees/{builderCode}`, and `GET /builder/trades?builder_code=...`.
 
 ## Kuest V2 contracts and collateral
@@ -93,7 +95,7 @@ Replace env vars exactly:
 | `POLYMARKET_ADDRESS`        | `KUEST_ADDRESS`         |
 
 Optional endpoint env vars (same names):
-- `CLOB_API_URL`, `WS_CLOB_URL`, `DATA_API_URL`, `BRIDGE_API_URL`, `RTDS_WS_URL`, `GAMMA_API_URL`
+- `CLOB_API_URL`, `WS_CLOB_URL`, `DATA_API_URL`, `BRIDGE_API_URL`, `WS_LIVE_DATA_URL`, `GAMMA_API_URL`
 
 Builder relayer env vars:
 - `KUEST_BUILDER_API_KEY`, `KUEST_BUILDER_SECRET`, `KUEST_BUILDER_PASSPHRASE`
@@ -126,7 +128,7 @@ Kuest uses slugs in a few market-scoped endpoints where Polymarket typically rel
 
 Kuest (slug inputs):
 - Data API: `GET /other` uses `slug` (event slug) plus `user`.
-- RTDS live data: subscription filters use `event_slug` for activity/comments.
+- Local live data: subscription filters use `event_slug` for activity/comments.
 
 Migration note:
 - If your Polymarket code stores Gamma event/market IDs, replace them with slugs when calling the Kuest endpoints above.
