@@ -31,8 +31,8 @@
       "polymarket": "https://bridge.polymarket.com",
       "kuest": "https://bridge.kuest.com"
     },
-    "rtds_ws": {
-      "polymarket": "wss://ws-live-data.polymarket.com",
+    "live_prices_ws": {
+      "polymarket": "wss://ws-live-v2.polymarket.com/ws",
       "kuest": "wss://ws-live-data.kuest.com"
     },
     "gamma_api": {
@@ -133,7 +133,7 @@
     "WS_CLOB_URL",
     "DATA_API_URL",
     "BRIDGE_API_URL",
-    "RTDS_WS_URL",
+    "WS_LIVE_DATA_URL",
     "GAMMA_API_URL"
   ],
   "sdk": {
@@ -179,7 +179,7 @@
     "replace_gamma_ids_with_slugs": true,
     "kuest_slug_endpoints": [
       "GET /other",
-      "RTDS activity/comment subscriptions"
+      "Local activity/comment subscriptions"
     ]
   },
   "kuest_only_market_mirror_extensions": {
