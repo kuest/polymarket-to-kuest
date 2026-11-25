@@ -42,10 +42,12 @@ Network rules:
 - Kuest Neg Risk CTF Exchange: `0xe7FA09cA716FDf498d74AFF618d32AFeacc310aB`
 
 Endpoint notes:
-- Keep the same Kuest subdomain when replacing a Polymarket host.
+- Live prices map `wss://ws-live-v2.polymarket.com/ws` to `wss://ws-live-data.kuest.com`; do not mechanically keep the upstream v2 hostname/path.
+- Price subscriptions use channel/filter frames; public clients never receive upstream credentials. Local activity/comments keep their topic protocol.
+- Use the endpoint mapping rather than blindly preserving the upstream subdomain/path.
 - Wire V2 helper endpoints when SDK code calls them: `/version`, `/clob-markets/{conditionId}`, `/fees/builder-fees/{builderCode}`, and `/builder/trades?builder_code=...`.
 - Kuest uses slugs in some places where Polymarket code often uses Gamma IDs.
-- In particular, market-scoped Kuest lookups may require event slugs for Data API and RTDS flows.
+- In particular, market-scoped Kuest lookups may require event slugs for Data API and local live-data flows.
 
 Recommended agent workflow:
 1. Replace env vars and auth headers.
